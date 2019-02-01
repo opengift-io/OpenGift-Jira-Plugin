@@ -69,14 +69,17 @@ public class IssueCreatedResolvedListener implements InitializingBean, Disposabl
         ApplicationUser myUser = UserUtils.getUser("admin");
 
         String request = getData("https://ya.ru");
-        System.out.println(request);
+//        System.out.println(request);
+        System.out.println(issue.getDescription());
         if (eventTypeId.equals(EventType.ISSUE_CREATED_ID)) {
             commentManager.create(issue, myUser, "adssasadsadsadasdsa", dispatchEvent);
             System.out.println("Issue "+issue.getKey()+" has been created at "+issue.getCreated()+".");
         } else if (eventTypeId.equals(EventType.ISSUE_RESOLVED_ID)) {
             log.error("Issue {} has been resolved at {}.", issue.getKey(), issue.getResolutionDate());
+            System.out.println("Issue "+issue.getKey()+" has been resolved at "+issue.getResolutionDate()+".");
         } else if (eventTypeId.equals(EventType.ISSUE_CLOSED_ID)) {
             log.error("Issue {} has been closed at {}.", issue.getKey(), issue.getUpdated());
+            System.out.println("Issue "+issue.getKey()+" has been closed at "+issue.getUpdated()+".");
         }
     }
 

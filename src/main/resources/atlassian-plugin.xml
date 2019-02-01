@@ -1,23 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
-    <plugin-info>
-        <description>${project.description}</description>
-        <version>${project.version}</version>
-        <vendor name="${project.organization.name}" url="${project.organization.url}" />
-        <param name="plugin-icon">images/pluginIcon.png</param>
-        <param name="plugin-logo">images/pluginLogo.png</param>
-    </plugin-info>
-
-    <!-- add our i18n resource -->
-    <resource type="i18n" name="i18n" location="resolve"/>
-    
-    <!-- add our web resources -->
-    <web-resource key="resolve-resources" name="resolve Web Resources">
-        <dependency>com.atlassian.auiplugin:ajs</dependency>
-        
-        <resource type="download" name="resolve.css" location="/css/resolve.css"/>
-        <resource type="download" name="resolve.js" location="/js/resolve.js"/>
-        <resource type="download" name="images/" location="/images"/>
-
-        <context>resolve</context>
-    </web-resource>
+  <plugin-info>
+    <description>${project.description}</description>
+    <version>${project.version}</version>
+    <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+    <param name="plugin-icon">images/pluginIcon.png</param>
+    <param name="plugin-logo">images/pluginLogo.png</param>
+  </plugin-info>
+  <!-- add our i18n resource -->
+  <resource type="i18n" name="i18n" location="resolve"/>
+  <!-- add our web resources -->
+  <web-resource key="resolve-resources" name="resolve Web Resources">
+    <dependency>com.atlassian.auiplugin:ajs</dependency>
+    <resource type="download" name="resolve.css" location="/css/resolve.css"/>
+    <resource type="download" name="resolve.js" location="/js/resolve.js"/>
+    <resource type="download" name="images/" location="/images"/>
+    <context>resolve</context>
+  </web-resource>
+  <web-panel name="ShareThisIssue" i18n-name-key="share-this-issue.name" key="share-this-issue" location="atl.jira.view.issue.right.context" weight="1000">
+    <description key="share-this-issue.description">The ShareThisIssue Plugin</description>
+    <context-provider class="opengift.contextproviders.ShareThisIssue"/>
+    <resource name="view" type="velocity" location="templates/share-this-issue.vm"/>
+    <label key="share-this-issue.title"/>
+  </web-panel>
+  <servlet key="admin-servlet" class="opengift.AdminUi">
+    <url-pattern>/resolve/admin</url-pattern>
+  </servlet>
+  <web-section key="admin_handler_config_section" location="admin_plugins_menu">
+    <label key="Plugin - Admin Configuration" />
+  </web-section>
+  <web-item key="plugin-admin-config-link"
+            section="system.top.navigation.bar">
+    <label key="Plugin Configuration" />
+    <link linkId="handler.plugin.configuration.link" key="plugin-configuration">/secure/PluginAdminConfigAction.jspa</link>
+  </web-item>
+  <webwork1 key="admin-config" name="Administration Configuration"
+            class="java.lang.Object">
+    <actions>
+      <action
+              name="opengift.AdminUi"
+              alias="PluginAdminConfigAction">
+        <view name="input" type="velocity">/templates/admin.vm</view>
+      </action>
+    </actions>
+  </webwork1>
+  <!--<rest key="rest" path="/resolve-admin" version="1.0">-->
+    <!--<description>Provides REST resources for the admin UI.</description>-->
+  <!--</rest>-->
 </atlassian-plugin>
