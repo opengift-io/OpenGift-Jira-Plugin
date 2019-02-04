@@ -3,18 +3,11 @@
     <title>Opengift Admin</title>
 </head>
 <body>
-<form id="admin">
-    <div>
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name">
-    </div>
-    <div>
-        <label for="time">Time</label>
-        <input type="text" id="time" name="time">
-    </div>
-    <div>
-        <input type="submit" value="Save">
-    </div>
-</form>
+<iframe class="js-projects" src="https://opengift.io/project/list/jira/?frame=yes&jira=1" style="width: 100%;"></iframe>
+<script>
+    $(function () {
+        $('iframe.js-projects').css('height', $(window).height());
+    });
+</script>
 </body>
 </html>

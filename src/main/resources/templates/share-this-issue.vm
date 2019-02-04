@@ -1,17 +1,6 @@
+$webResourceManager.requireResourcesForContext("resolve")
 #set ($overdueDays = $daysAwayFromDueDate * -1)
-<h2><a href="#">Share this issue</a></h2>
-<div class="js-issue-summary">$issueSummary</div>
-<div class="js-issue-description">$issueDescription</div>
-#if ($daysAwayFromDueDate)
-    #if ($daysAwayFromDueDate > 1)
-    <span style="font-weight: bold; color: green;">This issue is due in $daysAwayFromDueDate days.</span>
-    #elseif ($daysAwayFromDueDate == 1)
-    <span style="font-weight: bold; color: blue;">This is issue is due tomorrow.</span>
-    #elseif ($daysAwayFromDueDate == 0)
-    <span style="font-weight: bold; color: purple;">This issue is due today.</span>
-    #elseif ($daysAwayFromDueDate == -1)
-    <span style="font-weight: bold; color: #ff4500;">This issue was due yesterday!</span>
-    #elseif ($daysAwayFromDueDate < -1)
-    <span style="font-weight: bold; color: red;">This issue is overdue by $overdueDays days!</span>
-    #end
-#end
+<input type="hidden" class="js-issue-summary" value="$issueSummary $issueDescription" />
+<input type="hidden" class="js-issue-id" value="$issueId" />
+<h2>Similar issues</h2>
+<div class="js-task-list">Not found<br /><a href="#">Share this issue</a></div>

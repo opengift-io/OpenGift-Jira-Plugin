@@ -27,7 +27,7 @@ public class ShareThisIssue extends AbstractJiraContextProvider {
             contextMap.put("daysAwayFromDueDate", daysAwayFromDueDateCalc);
             contextMap.put("issueId", currentIssue.getId());
             contextMap.put("issueSummary", currentIssue.getSummary());
-            contextMap.put("issueDesc", currentIssue.getDescription());
+            contextMap.put("issueDescription", currentIssue.getDescription());
         }
 
 

@@ -5,13 +5,13 @@ import java.util.*;
 
 public class AdminUi extends JiraWebActionSupport {
 
-    public String doSample1() throws Exception {
+    public String doExecute() throws Exception {
         log.debug("Entering doSample1");
-        return "";
+        return "input";
     }
 
     public String doDefault() throws Exception {
         log.debug("Entering doDefault");
-        return "";
+        return "input";
     }
 }

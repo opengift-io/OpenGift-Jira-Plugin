@@ -32,15 +32,15 @@
   </web-section>
   <web-item key="plugin-admin-config-link"
             section="system.top.navigation.bar">
-    <label key="Plugin Configuration" />
-    <link linkId="handler.plugin.configuration.link" key="plugin-configuration">/secure/PluginAdminConfigAction.jspa</link>
+    <label key="Dependencies" />
+    <link linkId="handler.plugin.configuration.link" key="plugin-configuration">/secure/dependencies.jspa</link>
   </web-item>
   <webwork1 key="admin-config" name="Administration Configuration"
             class="java.lang.Object">
     <actions>
       <action
               name="opengift.AdminUi"
-              alias="PluginAdminConfigAction">
+              alias="dependencies">
         <view name="input" type="velocity">/templates/admin.vm</view>
       </action>
     </actions>
