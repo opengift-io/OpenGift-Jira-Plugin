@@ -1,4 +1,37 @@
 $(function () {
+    $('.js-share-issue').click(function () {
+        $.get(
+            'https://opengift.io/project/list/jira/requirements/?jira=1',
+            function(data) {
+                try {
+                    var projects = $.parseJSON(data);
+                    for (var i in projects) {
+                        var project = projects[i];
+                        $('<label></label>')
+                            .append(
+                                $('<input/>')
+                                    .attr({
+                                        'type': 'radio',
+                                        'name': 'requirements',
+                                        'checked': (i === 0) ? 'checked' : false,
+                                        'value': project.id
+                                    })
+                            )
+                            .append(
+                                $('<span></span>')
+                                    .css({'font-weight': 'bold', 'color': 'green'})
+                                    .text(project.name)
+                            ).appendTo($('.js-requirements--req-list').show());
+                        $('.js-requirements').show();
+                    }
+                } catch (e) {
+
+                }
+            }
+        );
+        return false;
+    });
+
     $(document).on('click', '.js-assign-issue', function() {
         $.post(
             'https://opengift.io/tasks/jira/assign/?jira=1',
@@ -19,22 +52,11 @@ $(function () {
             if (data) {
                 try {
                     var task = $.parseJSON(data);
-                    $('<p></p>')
-                        .append(
-                            $('<h2></h2>')
-                                .text('Task assigned to')
-                        )
-                        .append(
-                            $('<span></span>')
-                                .css({'color': 'grey'})
-                                .text(task['project']['name'])
-                        )
-                        .append(
-                            $('<div></div>')
-                                .css({'font-weight': 'bold', 'color': 'green'})
-                                .text(task.name)
-                        )
-                        .appendTo($taskList);
+                    $('.js-task-list').hide();
+                    $('.js-assigned').show();
+                    $('.js-assigned--project-name').text(task.project.name);
+                    $('.js-assigned--name').text(task.name);
+                    $('.js-assigned--requirements').text(task.requirementsQty);
                 } catch (e) {
                     console.log('error')
                 }

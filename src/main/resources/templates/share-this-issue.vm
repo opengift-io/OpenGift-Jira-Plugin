@@ -3,4 +3,17 @@ $webResourceManager.requireResourcesForContext("resolve")
 <input type="hidden" class="js-issue-summary" value="$issueSummary $issueDescription" />
 <input type="hidden" class="js-issue-id" value="$issueId" />
 <h2>Similar issues</h2>
-<div class="js-task-list">Not found<br /><a href="#">Share this issue</a></div>
+<div class="js-task-list">
+    Not found<br />
+    <a href="#" class="js-share-issue">Share this issue</a>
+</div>
+<div class="js-assigned" style="display: none;">
+    <h2>Task assigned to</h2>
+    <span style="color:grey;" class="js-assigned--project-name"></span>
+    <b style="color:green;" class="js-assigned--project-name"></b>
+    <span style="color:grey;" ><b class="js-assigned--requirements"></b> companies want this task to be done.</span>
+</div>
+<div class="js-requirements modal" style="display: none;">
+    <div class="js-requirements--req-list"></div>
+    <a class="js-share-issue--submit" href="#">Share issue</a>
+</div>
