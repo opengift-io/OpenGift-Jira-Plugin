@@ -20,15 +20,9 @@ public class ShareThisIssue extends AbstractJiraContextProvider {
         Issue currentIssue = (Issue) jiraHelper.getContextParams().get("issue");
         Timestamp dueDate = currentIssue.getDueDate();
 
-        if (dueDate != null) {
-            LocalDate currentTimeInDays = LocalDate.now();
-            LocalDate dueDateTimeInDays = dueDate.toLocalDateTime().toLocalDate();
-            long daysAwayFromDueDateCalc = DAYS.between(currentTimeInDays, dueDateTimeInDays);
-            contextMap.put("daysAwayFromDueDate", daysAwayFromDueDateCalc);
-            contextMap.put("issueId", currentIssue.getId());
-            contextMap.put("issueSummary", currentIssue.getSummary());
-            contextMap.put("issueDescription", currentIssue.getDescription());
-        }
+        contextMap.put("issueId", currentIssue.getId());
+        contextMap.put("issueSummary", currentIssue.getSummary());
+        contextMap.put("issueDescription", currentIssue.getDescription());
 
 
         return contextMap;
