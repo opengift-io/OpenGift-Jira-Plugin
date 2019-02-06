@@ -60,6 +60,7 @@ $(function () {
         );
     });
     function getAssigned() {
+        $('.js-requirements').hide();
         $.get(
             'https://opengift.io/tasks/jira/get_assigned/?jira=1&issue_id=' + $('.js-issue-id').val(),
             function(data) {
