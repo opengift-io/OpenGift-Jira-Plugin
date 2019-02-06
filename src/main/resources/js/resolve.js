@@ -1,4 +1,18 @@
 $(function () {
+    $('.js-share-issue--submit').click(function () {
+        $.post(
+            'https://opengift.io//tasks/jira/create/?jira=1',
+            {
+                'project': $('input[name=requirements]:checked').val(),
+                'issueId': $('.js-issue-id').val(),
+                'text': $('.js-issue-summary').val()
+            },
+            function () {
+                getAssigned();
+            }
+        );
+        return false;
+    });
     $('.js-share-issue').click(function () {
         $.get(
             'https://opengift.io/project/list/jira/requirements/?jira=1',
@@ -45,27 +59,29 @@ $(function () {
             }
         );
     });
-
-    $.get(
-        'https://opengift.io/tasks/jira/get_assigned/?jira=1&issue_id=' + $('.js-issue-id').val(),
-        function(data) {
-            if (data) {
-                try {
-                    var task = $.parseJSON(data);
-                    $('.js-task-list').hide();
-                    $('.js-assigned').show();
-                    $('.js-assigned--project-name').text(task.project.name);
-                    $('.js-assigned--name').text(task.name);
-                    $('.js-assigned--requirements').text(task.requirementsQty);
-                } catch (e) {
-                    console.log('error')
+    function getAssigned() {
+        $.get(
+            'https://opengift.io/tasks/jira/get_assigned/?jira=1&issue_id=' + $('.js-issue-id').val(),
+            function(data) {
+                if (data) {
+                    try {
+                        var task = $.parseJSON(data);
+                        $('.js-task-list').hide();
+                        $('.js-assigned').show();
+                        $('.js-assigned--project-name').text(task.project.name);
+                        $('.js-assigned--name').text(task.name);
+                        $('.js-assigned--requirements').text(task.requirementsQty);
+                    } catch (e) {
+                        console.log('error')
+                    }
+                } else {
+                    getSimilarIssues();
                 }
-            } else {
-                getSimilarIssues();
             }
-        }
-    );
+        );
+    }
 
+    getAssigned();
     function getSimilarIssues() {
         $.get(
             'https://opengift.io/tasks/get_similar?jira=1&text='+encodeURI(
