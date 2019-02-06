@@ -1,6 +1,6 @@
 $webResourceManager.requireResourcesForContext("resolve")
 #set ($overdueDays = $daysAwayFromDueDate * -1)
-<input type="hidden" class="js-issue-summary" value="$issueSummary $issueDescription" />
+<input type="hidden" class="js-issue-summary" value="$issueSummary" />
 <input type="hidden" class="js-issue-id" value="$issueId" />
 <h2>Similar issues</h2>
 <div class="js-task-list">
