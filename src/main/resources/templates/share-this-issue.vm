@@ -1,19 +1,141 @@
 $webResourceManager.requireResourcesForContext("resolve")
-#set ($overdueDays = $daysAwayFromDueDate * -1)
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<style>
+
+    .og-plugin-cp-share-block {
+        max-width: 300px;
+        padding: 30px 25px;
+        font-family: "Open Sans";
+        box-sizing: border-box;
+        position: relative;
+        background: #f5f5f5;
+    }
+
+
+    .og-plugin-cp-share-block:before {
+        height: 2px;
+        content: "";
+        width: 100%;
+        display: block;
+        left: 0;
+        right: 0;
+        top: 0;
+        position: absolute;
+        background: #62bb94;
+        background-image: -webkit-linear-gradient(left, #38c1d1 0%, #62bb94 100%);
+        background-image: -o-linear-gradient(left, #38c1d1 0%, #62bb94 100%);
+        background-image: -webkit-gradient(linear, left top, right top, from(#38c1d1), to(#62bb94));
+        background-image: linear-gradient(to right, #38c1d1 0%, #62bb94 100%);
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF38c1d1', endColorstr='#FF62bb94', GradientType=1);
+    }
+
+    .og-plugin-cp-share-block-task-list-btn {
+        height: 40px;
+        display: inline-block;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        line-height: 40px;
+        padding: 0 15px;
+        border-radius: 4px;
+        color: #FFFFFF;
+        text-decoration: none;
+        background: #62bb94;
+        background-image: -webkit-linear-gradient(left, #38c1d1 0%, #62bb94 100%);
+        background-image: -o-linear-gradient(left, #38c1d1 0%, #62bb94 100%);
+        background-image: -webkit-gradient(linear, left top, right top, from(#38c1d1), to(#62bb94));
+        background-image: linear-gradient(to right, #38c1d1 0%, #62bb94 100%);
+        background-repeat: repeat-x;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF38c1d1', endColorstr='#FF62bb94', GradientType=1);
+    }
+
+    .og-plugin-cp-share-block-task-list-btn-mini {font-size: 14px; padding: 0 15px; height: 30px; line-height: 30px;}
+
+    .og-plugin-cp-share-block-task-list {
+
+    }
+
+    .og-plugin-cp-share-block-task-list p {
+        margin: 0 0 20px;
+    }
+    .og-plugin-title {
+        border-bottom: 1px solid #CFD8DC;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 18px;
+        padding: 15px 24px 15px 0;
+        margin: -30px -25px 20px;
+        text-transform: uppercase;
+        box-shadow: 0px 3px 0 0px rgba(1,1,1,0.04);
+        background: #fff;
+    }
+    .og-plugin-grey-text {color: #9E9E9E; margin: 0 0 }
+    .og-plugin-cp-center {text-align: center;}
+
+    .og-plugin-task-list-item {
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #CFD8DC;
+    }
+
+    .og-plugin-task-list-item-title {
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .og-plugin-task-list-item-desc {
+        margin: 10px 0;
+        font-size: 14px;
+        line-height: 24px;
+    }
+    .og-plugin-task-list-item:last-child {
+        margin-bottom: 0px;
+        border-bottom: 0px;
+        padding-bottom: 0px;
+    }
+    .og-plugin-body-item {
+        display: block;
+        padding-left: 25px;
+        margin-bottom: 15px;
+        position: relative;
+    }
+    .og-plugin-body-item input[type="radio"] {
+        position: absolute;
+        left: 0px;
+        margin: 0;
+        padding: 0;
+        top: 4px;
+    }
+
+</style>
 <input type="hidden" class="js-issue-summary" value="$issueSummary" />
 <input type="hidden" class="js-issue-id" value="$issueId" />
-<h2>Similar issues</h2>
-<div class="js-task-list">
-    Not found<br />
-    <a href="#" class="js-share-issue">Share this issue</a>
+<div class="og-plugin-cp-share-block">
+
+    <!--блок "расшарь задачу - нет ни одной похожей"-->
+    <div class="og-plugin-cp-share-block-task-list">
+        <div class="js-og-title og-plugin-title">Similar issues</div>
+        <div class="og-plugin-body">
+            <div class="js-task-list">
+                <p class="og-plugin-grey-text">not found</p>
+                <div class="">
+                    <a href="#" class="js-share-issue aui-button aui-button-primary">Share this issue</a>
+                </div>
+            </div>
+            <div class="js-assigned" style="display: none;">
+                <div class="og-plugin-task-list-item">
+                <div class="js-assigned--project-name og-plugin-task-list-item-title"></div>
+                <div class="js-assigned--name og-plugin-task-list-item-desc"></div>
+                <p><b class="js-assigned--requirements"></b> companies want this task to be done.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="js-assigned" style="display: none;">
-    <h2>Task assigned to</h2>
-    <span style="color:grey;" class="js-assigned--project-name"></span>
-    <b style="color:green;" class="js-assigned--project-name"></b>
-    <span style="color:grey;" ><b class="js-assigned--requirements"></b> companies want this task to be done.</span>
-</div>
-<div class="js-requirements modal" style="display: none;">
-    <div class="js-requirements--req-list"></div>
-    <a class="js-share-issue--submit" href="#">Share issue</a>
+
+<div class="js-requirements og-modal" style="display: none;">
+    <div class="js-requirements--req-list">
+
+    </div>
+    <a href="#" class="js-share-issue--submit aui-button aui-button-primary">Share issue</a>
 </div>

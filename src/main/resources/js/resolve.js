@@ -19,9 +19,11 @@ $(function () {
             function(data) {
                 try {
                     var projects = $.parseJSON(data);
+                    var $reqList = $('.js-requirements--req-list').show().empty();
                     for (var i in projects) {
                         var project = projects[i];
-                        $('<label></label>')
+
+                        $('<label></label>').addClass('og-plugin-body-item')
                             .append(
                                 $('<input/>')
                                     .attr({
@@ -35,7 +37,7 @@ $(function () {
                                 $('<span></span>')
                                     .css({'font-weight': 'bold', 'color': 'green'})
                                     .text(project.name)
-                            ).appendTo($('.js-requirements--req-list').show());
+                            ).appendTo($reqList);
                         $('.js-requirements').show();
                     }
                 } catch (e) {
@@ -69,6 +71,7 @@ $(function () {
                         var task = $.parseJSON(data);
                         $('.js-task-list').hide();
                         $('.js-assigned').show();
+                        $('.js-og-title').text('Task assigned to')
                         $('.js-assigned--project-name').text(task.project.name);
                         $('.js-assigned--name').text(task.name);
                         $('.js-assigned--requirements').text(task.requirementsQty);
@@ -98,23 +101,24 @@ $(function () {
                         var k, task;
                         for (k in data) {
                             task = data[k];
-                            $('<p></p>')
+                            $('<div></div>').addClass('og-plugin-task-list-item')
                                 .append(
-                                    $('<span></span>')
-                                        .css({'color': 'grey'})
+                                    $('<div></div>')
+                                        .addClass('og-plugin-task-list-item-title')
                                         .text(task['project']['name'])
                                 )
                                 .append(
                                     $('<div></div>')
-                                        .css({'font-weight': 'bold', 'color': 'green'})
+                                        .addClass('og-plugin-task-list-item-desc')
                                         .text(task.name)
                                 )
                                 .append(
                                     $('<div></div>')
+                                        .addClass('og-plugin-task-list-item-button')
                                         .append(
                                             $('<a></a>')
                                                 .data('id', task.id)
-                                                .addClass('js-assign-issue')
+                                                .addClass('js-assign-issue aui-button aui-button-primary')
                                                 .text('Assign')
                                         )
                                 )
