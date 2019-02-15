@@ -99,12 +99,51 @@ $webResourceManager.requireResourcesForContext("resolve")
         margin-bottom: 15px;
         position: relative;
     }
+
+    .og-plugin-body-item:last-child {
+        margin-bottom:0px;
+    }
     .og-plugin-body-item input[type="radio"] {
         position: absolute;
         left: 0px;
         margin: 0;
         padding: 0;
         top: 4px;
+    }
+
+    .og-plugin-requirements-modal {
+        position: absolute;
+        background: #FFFFFF;
+        z-index: 100;
+        padding: 0 20px;
+        left: 50%;
+        right: 0;
+        box-shadow: 0 1px 40px rgba(1,1,1,0.3);
+        margin: 0px 15px -250px 0;
+        border-radius: 4px;
+        width: 500px;
+        top: 15%;
+    }
+    .og-plugin-requirements-modal-header {
+        font-weight: bold;
+        font-size: 16px;
+        padding: 15px 0px 10px;
+        border-bottom: 3px solid #f5f5f5;
+    }
+    .og-plugin-requirements-modal-footer {
+        padding: 15px 20px;
+        background: #f5f5f5;
+        margin: 0 -20px;
+        border-radius: 0 0 4px 4px;
+
+    }
+    .og-plugin-requirements-modal-list {
+        max-height: 200px;
+        overflow-y: auto;
+        background: #fff;
+        margin: 0 -20px;
+        padding: 20px;
+        font-size: 13px;
     }
 
 </style>
@@ -131,11 +170,14 @@ $webResourceManager.requireResourcesForContext("resolve")
             </div>
         </div>
     </div>
-</div>
 
-<div class="js-requirements og-modal" style="display: none;">
-    <div class="js-requirements--req-list">
+</div>
+<div class="js-requirements modal og-plugin-requirements-modal" style="display: none;">
+    <div class="og-plugin-requirements-modal-header">Select the Project</div>
+    <div class="js-requirements--req-list og-plugin-requirements-modal-list">
 
     </div>
-    <a href="#" class="js-share-issue--submit aui-button aui-button-primary">Share issue</a>
+    <div class="og-plugin-requirements-modal-footer">
+        <a href="#" class="js-share-issue--submit aui-button aui-button-primary">Share issue</a>
+    </div>
 </div>

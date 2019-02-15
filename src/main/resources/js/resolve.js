@@ -1,4 +1,5 @@
 $(function () {
+    $('.js-requirements').appendTo('body');
     $('.js-share-issue--submit').click(function () {
         $.post(
             'https://opengift.io//tasks/jira/create/?jira=1',
